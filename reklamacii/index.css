@@ -1,0 +1,15 @@
+.complaints{
+    background: #A89271!important;
+}
+.reclamacii-table{
+    overflow-x: hidden!important;
+    overflow-y: auto!important;
+}
+
+.table-head .resize-btn::after{
+    width: 0px !important;
+}
+
+.table-head th:last-child .resize-btn{
+    height: 0;
+}
