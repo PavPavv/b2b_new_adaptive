@@ -11,7 +11,9 @@
     <meta name="description" content="ТОП СПОРТС">
     <link rel="stylesheet" type="text/css" href="../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/media_main.css">
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="media_index.css">
 </head>
 
 <body>
@@ -19,9 +21,14 @@
     <div class="header">
         <div class="header-top">
             <div class="container row">
+                <div class="sandwich">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <div class="left-side row">
                     <a class="logo" href="../"><img src="../img/logo.svg" alt="Логотип" /></a>
-                    <div class="row">
+                    <div class="row" id="menu">
                         <div class="activate hover">
                             <div class="head row">
                                 <div class="title">Каталоги</div>
@@ -68,21 +75,21 @@
                                 </div>
                                 <!-- Если в выпадающем меню нужна информация о пользователе -->
                                 <!-- <a class="menu-item row" href="#">
-                        <div class="title">Экипировка</div>
-                        <div class="cart full">189</div>
-                    </a>
-                    <a class="menu-item row" href="#">
-                        <div class="title">Снегоходы</div>
-                        <div class="cart full">44</div>
-                    </a>
-                    <a class="menu-item row" href="#">
-                        <div class="title">Лодки и моторы</div>
-                        <div class="cart">12</div>
-                    </a>
-                    <a class="menu-item row" href="#">
-                        <div class="title">Мерчандайзинг</div>
-                        <div class="cart">0</div>
-                    </a> -->
+                            <div class="title">Экипировка</div>
+                            <div class="cart full">189</div>
+                        </a>
+                        <a class="menu-item row" href="#">
+                            <div class="title">Снегоходы</div>
+                            <div class="cart full">44</div>
+                        </a>
+                        <a class="menu-item row" href="#">
+                            <div class="title">Лодки и моторы</div>
+                            <div class="cart">12</div>
+                        </a>
+                        <a class="menu-item row" href="#">
+                            <div class="title">Мерчандайзинг</div>
+                            <div class="cart">0</div>
+                        </a> -->
                             </div>
                         </div>
                         <div class="activate hover">
@@ -126,9 +133,9 @@
                         <div class="drop-down">
                             <!-- Если в выпадающем меню нужна информация о пользователе -->
                             <!-- <a href="#">
-                    <div class="title">Пользователь</div>
-                    <div class="username">Виктор Пашковски</div>
-                    </a> -->
+                        <div class="title">Пользователь</div>
+                        <div class="username">Виктор Пашковски</div>
+                        </a> -->
                             <div class="links">
                                 <a class="item" href="#">Пользователи</a>
                                 <a class="item" href="#">Контрагенты</a>
@@ -672,8 +679,119 @@
         </div>
     </div>
 
+    <!-- Мобильное меню -->
+    <div class="menu-mob overlay" id="mobMenu">
+        <div class="menu-mob body" id="mobBody">
+            <div class="menu-mob head-mob">
+                <svg class="close-btn" id="closeMob" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round"></path>
+                    <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round"></path>
+                </svg>
+                <a class="logo" href="../"><img src="../img/logo.svg" alt="Логотип" /></a>
+            </div>
+            <div class="mob-catalog">
+                <div class="col">
+                    <div class="activate hover mobItem">
+                        <div class="head row">
+                            <div class="title">Каталоги</div>
+                            <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
+                            </svg>
+                        </div>
+                        <div class="drop-down catalogs">
+                            <div class="row">
+                                <a class="item catalog" href="#">Предзаказы</a>
+                                <a class="item cart-info row" href="#">
+                                    <div class="cart icon"></div>
+                                    <div class="amount">0</div>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <a class="item catalog" href="#">Экипировка</a>
+                                <a class="item cart-info row" href="#">
+                                    <div class="cart icon"></div>
+                                    <div class="amount full">189</div>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <a class="item catalog" href="#">Снегоходы</a>
+                                <a class="item cart-info row" href="#">
+                                    <div class="cart icon"></div>
+                                    <div class="amount full">44</div>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <a class="item catalog" href="#">Лодки и моторы</a>
+                                <a class="item cart-info row" href="#">
+                                    <div class="cart icon"></div>
+                                    <div class="amount full">12</div>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <a class="item catalog" href="#">Мерчандайзинг</a>
+                                <a class="item cart-info row" href="#">
+                                    <div class="cart icon"></div>
+                                    <div class="amount">0</div>
+                                </a>
+                            </div>
+                            <!-- Если в выпадающем меню нужна информация о пользователе -->
+                            <!-- <a class="menu-item row" href="#">
+                                            <div class="title">Экипировка</div>
+                                            <div class="cart full">189</div>
+                                        </a>
+                                        <a class="menu-item row" href="#">
+                                            <div class="title">Снегоходы</div>
+                                            <div class="cart full">44</div>
+                                        </a>
+                                        <a class="menu-item row" href="#">
+                                            <div class="title">Лодки и моторы</div>
+                                            <div class="cart">12</div>
+                                        </a>
+                                        <a class="menu-item row" href="#">
+                                            <div class="title">Мерчандайзинг</div>
+                                            <div class="cart">0</div>
+                                        </a> -->
+                        </div>
+                    </div>
+    
+                    <!--  -->
+                    <div class="activate hover mobItem">
+                        <div class="head row">
+                            <div class="title">Закупки</div>
+                            <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
+                            </svg>
+                        </div>
+                        <div class="drop-down">
+                            <a class="item" href="#">Заказы</a>
+                            <a class="item" href="#">Оплаты</a>
+                            <a class="item" href="#">Рекламации</a>
+                            <a class="item" href="#">Документы</a>
+                            <a class="item" href="#">Сертификаты</a>
+                        </div>
+                    </div>
+                    <div class="activate hover mobItem">
+                        <div class="head row">
+                            <div class="title">Оплаты</div>
+                            <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
+                            </svg>
+                        </div>
+                        <div class="drop-down">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/common.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/mobile.js"></script>
 </body>
 
 </html>

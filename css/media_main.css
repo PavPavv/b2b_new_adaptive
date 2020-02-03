@@ -1,0 +1,72 @@
+/* медиа запросы для мобильного меню */
+@media (max-width: 1493px) {
+    #alerts-body .message .icon {
+        margin-right: 0.7vw;
+    }
+    #menu .activate:nth-child(3){
+        width: 10em;
+    }
+}
+@media (max-width: 1376px) {
+    .activate{
+        min-width: 1vw;
+    }
+}
+@media(max-width: 1269px) {
+    #menu{
+        display: none;
+    }
+    .sandwich{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 34px;
+        height: 21px;
+        cursor: pointer;
+    }
+    .sandwich span{
+        width: 100%;
+        height: 3px;
+        background: #454D56;
+    }
+    .header-top .container {
+        height: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header-top .logo {
+        height: 32px;
+        margin-right: 0;
+        margin-left: 13vw;
+    }
+    .activate{
+        width: 100%;
+    }
+    .activate .head{
+        border:0;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(52, 73, 94, 0.4);
+    }
+
+}
+@media (max-width: 767px) {
+    .header-top .logo{
+        display: none;
+    }
+    .menu-mob .head-mob{
+        display: flex;
+    }
+}
+@media (max-width: 450px) {
+    .menu-mob.body{
+        width: 80%;
+    }
+}
+@media(max-width: 400px) {
+    .header-top .profile.icon{
+        display: none;
+    }
+    .header-top .activate{
+        width:12.5em;
+    }
+}

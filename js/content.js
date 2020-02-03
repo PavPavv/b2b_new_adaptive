@@ -177,7 +177,7 @@ var fullImgCarousel = {
 // Установка ширины галереи:
 
 function setGalleryWidth() {
-  galleryWrap.style.width = (content.clientWidth - filters.clientWidth) + 'px';
+  galleryWrap.style.width = (content.clientWidth - filters.clientWidth - 10) + 'px';
   setMinCardWidth();
 }
 

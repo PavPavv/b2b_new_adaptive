@@ -110,10 +110,15 @@
                 <div class="profile icon"></div>
                 <div class="login">
                   <div class="title">TS00000905</div>
-                  <div class="username text light">Виктор Пашковски</div>
+                  <div class="username">Виктор Пашковски</div>
                 </div>
               </div>
               <div class="drop-down">
+                <!-- Если в выпадающем меню нужна информация о пользователе -->
+                <!-- <a href="#">
+                  <div class="title">Пользователь</div>
+                  <div class="username">Виктор Пашковски</div>
+                </a> -->
                 <div class="links">
                   <a class="item" href="#">Пользователи</a>
                   <a class="item" href="#">Контрагенты</a>
@@ -124,7 +129,7 @@
                 <a id="exit" class="item" class="menu-item" href="#">Выйти</a>
               </div>
             </div>
-            <div class="alerts icon" onclick="showMessages()">
+            <div class="alerts icon" onclick="showMessages(event)">
               <div class="count row">35</div>
             </div>
           </div>
@@ -2730,10 +2735,6 @@
 
         <div class="view-blocks icon active" tooltip="Плитка"></div>
 
-        <div class="free-qty icon"></div>
-
-        <div class="wait-qty icon"></div>
-
         <div class="download icon"></div>
 
         <div class="cart">
@@ -2871,11 +2872,11 @@
             </svg>
           </div>
           <div class="drop-down">
-            <div class="item" data-value="1">Значение 1</div>
-            <div class="item" data-value="2">Значение 2</div>
-            <div class="item" data-value="3">Значение 3</div>
-            <div class="item" data-value="4">Значение 4</div>
-            <div class="item" data-value="5">Значение 5</div>
+            <div class="item">Значение 1</div>
+            <div class="item">Значение 2</div>
+            <div class="item">Значение 3</div>
+            <div class="item">Значение 4</div>
+            <div class="item">Значение 5</div>
           </div>
         </div>
 
@@ -2888,23 +2889,23 @@
             </svg>
           </div>
           <div class="drop-down">
-            <div class="item row" data-value="1">
+            <div class="item row">
               <div class="checkbox icon"></div>
               <div>Значение 1</div>
             </div>
-            <div class="item row" data-value="2">
+            <div class="item row">
               <div class="checkbox icon"></div>
               <div>Значение 2</div>
             </div>
-            <div class="item row" data-value="3">
+            <div class="item row">
               <div class="checkbox icon"></div>
               <div>Значение 3</div>
             </div>
-            <div class="item row" data-value="4">
+            <div class="item row">
               <div class="checkbox icon"></div>
               <div>Значение 4</div>
             </div>
-            <div class="item row" data-value="5">
+            <div class="item row">
               <div class="checkbox icon"></div>
               <div>Значение 5</div>
             </div>
@@ -2917,8 +2918,8 @@
 
 
     <!-- Шаблон окна уведомлений -->
-    <div id="alerts-container" class="row" onclick="closeMessages(event)">
-      <div class="alerts pop-up">
+    <div id="alerts-container" class="row" onclick="closeMessages()">
+      <div class="alerts">
         <div class="alerts-title row">
           <div class="row">
             <div class="alerts icon"></div>
@@ -3105,6 +3106,7 @@
       </div>
     </div>
 
+    <script src ="js/common.js"></script>
     <script src ="js/main.js"></script>
 
   </body>

@@ -87,7 +87,7 @@ function checkCartRelevance() {
   var id, freeQty, price, retailPrice, actionId, discount, curActionId,
       cartInfo = cart[cartId];
 
-  for (let id in cartInfo) {
+  for (id in cartInfo) {
     freeQty = cartInfo[id].freeQty;
     price = cartInfo[id].price;
     retailPrice = cartInfo[id].retailPrice;
@@ -122,7 +122,7 @@ function saveCartInfo(id, options) {
   }
   cart[cartId][id].cartId = cartId;
   cart[cartId][id].id = id.replace('id_', '');
-  for (let key in options) {
+  for (key in options) {
     cart[cartId][id][key] = options[key];
   }
   cartChanges[id] = cart[cartId][id];
@@ -200,7 +200,7 @@ function countFromCart(idList) {
       curRetailPrice,
       cartInfo = cart[cartId];
 
-  for (let key in cartInfo) {
+  for (key in cartInfo) {
     id = cartInfo[key].id;
     freeQty = cartInfo[key].freeQty;
     if (idList && (idList != id && idList.indexOf(id) === -1) || freeQty <= 0) {
@@ -431,7 +431,7 @@ function createCartFilters() {
   var list = '',
       newItem,
       unique = [];
-  for (let item of discounts) {
+  for (item of discounts) {
     if (item.dtitle && unique.indexOf(item.did) === -1) {
       unique.push(item.did);
       newItem = cartFiltersTemplate
@@ -453,7 +453,7 @@ function createActionFilter() {
   var list = '',
       newItem,
       unique = [];
-  for (let item of discounts) {
+  for (item of discounts) {
     if (item.dtitle && unique.indexOf(item.did) === -1) {
       unique.push(item.did);
       newItem = itemFilterActionTemplate
@@ -476,7 +476,7 @@ function createCartList() {
       newItem,
       qty,
       cartInfo = cart[cartId];
-  for (let key in cartInfo) {
+  for (key in cartInfo) {
     qty = cartInfo[key].qty;
     key = key.replace('id_', '');
     findCurData(key);
@@ -506,7 +506,7 @@ function findCurData(id) {
   curArticul = null;
   curProduct = items.find(el => {
     if (el.sizes && el.sizes != 0) {
-      for (let item in el.sizes) {
+      for (item in el.sizes) {
         if (el.sizes[item].object_id == id) {
           curArticul = el.sizes[item];
           return true;
@@ -527,7 +527,7 @@ function findCurArticul(articul) {
   curArticul = null;
   curProduct = items.find(el => {
     if (el.sizes && el.sizes != 0) {
-      for (let item in el.sizes) {
+      for (item in el.sizes) {
         if (el.sizes[item].articul == articul) {
           curArticul = el.sizes[item];
           return true;
@@ -718,7 +718,7 @@ function changeNameBtn(el, qty) {
 
 function changeCardInfo(card) {
   var selectInfo = card.querySelector('.select-info'),
-      // bonusRow = selectInfo.querySelector('.bonus'),
+      bonusRow = selectInfo.querySelector('.bonus'),
       idList = Array.from(card.querySelectorAll('.choiced-qty')).map(item => item.dataset.id),
       totals = countFromCart(idList);
 
@@ -728,16 +728,16 @@ function changeCardInfo(card) {
     if (curProduct) {
       imgNumb = curProduct.images[0];
     }
-    // bonusRow.querySelector('.bonus-img').src = `http://b2b.topsports.ru/c/productpage/${imgNumb}.jpg`;
-    // bonusRow.style.display = 'flex';
+    bonusRow.querySelector('.bonus-img').src = `http://b2b.topsports.ru/c/productpage/${imgNumb}.jpg`;
+    bonusRow.style.display = 'flex';
   } else {
-    // bonusRow.style.display = 'none';
+    bonusRow.style.display = 'none';
   }
 
   if (totals.amount > 0) {
-    card.querySelector('.select-count span').textContent = totals.amount;
-    card.querySelector('.select-price span').textContent = totals.discountPrice.toLocaleString();
-    // bonusRow.querySelector('.bonus-qty span').textContent = totals.bonus;
+    card.querySelector('.select-count').textContent = totals.amount;
+    card.querySelector('.select-price').textContent = totals.discountPrice.toLocaleString();
+    bonusRow.querySelector('.bonus-qty span').textContent = totals.bonus;
     selectInfo.style.visibility = 'visible';
   } else {
     selectInfo.style.visibility = 'hidden';
@@ -991,7 +991,7 @@ function filterCart1(event) {
     });
     menuTitle.textContent = 'Выбрано: ' + checked.length;
     allRows.forEach(row => {
-      for (let item of checked) {
+      for (item of checked) {
         if (row.dataset.actionId === item.dataset.id) {
           row.classList.add('checked');
           row.classList.remove('displayNone');
