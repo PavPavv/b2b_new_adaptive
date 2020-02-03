@@ -10,23 +10,33 @@
     <meta name="description" content="ТОП СПОРТС">
     <link rel="stylesheet" type="text/css" href="../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/media_main.css">
     <link rel="stylesheet" type="text/css" href="content.css">
     <link rel="stylesheet" type="text/css" href="cart.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="media_index.css">
   </head>
 
   <body id="o_ek" class="ekipirovka" data-website="ts_com" data-view="list">
 
+    <!-- Шапка -->
     <div class="header">
       <div class="header-top">
         <div class="container row">
+          <div class="sandwich">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div class="left-side row">
-            <a class="logo" href="../"><img src="../img/logo.svg" alt="Логотип"/></a>
-            <div class="row">
+            <a class="logo" href="../"><img src="../img/logo.svg" alt="Логотип" /></a>
+            <div class="row" id="menu">
               <div class="activate hover">
                 <div class="head row">
                   <div class="title">Каталоги</div>
-                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E"/>
+                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
                   </svg>
                 </div>
                 <div class="drop-down catalogs">
@@ -58,30 +68,38 @@
                       <div class="amount full">12</div>
                     </a>
                   </div>
+                  <div class="row">
+                    <a class="item catalog" href="#">Мерчандайзинг</a>
+                    <a class="item cart-info row" href="#">
+                      <div class="cart icon"></div>
+                      <div class="amount">0</div>
+                    </a>
+                  </div>
                   <!-- Если в выпадающем меню нужна информация о пользователе -->
                   <!-- <a class="menu-item row" href="#">
-                    <div class="title">Экипировка</div>
-                    <div class="cart full">189</div>
-                  </a>
-                  <a class="menu-item row" href="#">
-                    <div class="title">Снегоходы</div>
-                    <div class="cart full">44</div>
-                  </a>
-                  <a class="menu-item row" href="#">
-                    <div class="title">Лодки и моторы</div>
-                    <div class="cart">12</div>
-                  </a>
-                  <a class="menu-item row" href="#">
-                    <div class="title">Мерчандайзинг</div>
-                    <div class="cart">0</div>
-                  </a> -->
+                            <div class="title">Экипировка</div>
+                            <div class="cart full">189</div>
+                        </a>
+                        <a class="menu-item row" href="#">
+                            <div class="title">Снегоходы</div>
+                            <div class="cart full">44</div>
+                        </a>
+                        <a class="menu-item row" href="#">
+                            <div class="title">Лодки и моторы</div>
+                            <div class="cart">12</div>
+                        </a>
+                        <a class="menu-item row" href="#">
+                            <div class="title">Мерчандайзинг</div>
+                            <div class="cart">0</div>
+                        </a> -->
                 </div>
               </div>
               <div class="activate hover">
                 <div class="head row">
                   <div class="title">Закупки</div>
-                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E"/>
+                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
                   </svg>
                 </div>
                 <div class="drop-down">
@@ -95,8 +113,9 @@
               <div class="activate hover">
                 <div class="head row">
                   <div class="title">Оплаты</div>
-                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E"/>
+                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
                   </svg>
                 </div>
                 <div class="drop-down">
@@ -116,9 +135,9 @@
               <div class="drop-down">
                 <!-- Если в выпадающем меню нужна информация о пользователе -->
                 <!-- <a href="#">
-                  <div class="title">Пользователь</div>
-                  <div class="username">Виктор Пашковски</div>
-                </a> -->
+                        <div class="title">Пользователь</div>
+                        <div class="username">Виктор Пашковски</div>
+                        </a> -->
                 <div class="links">
                   <a class="item" href="#">Пользователи</a>
                   <a class="item" href="#">Контрагенты</a>
@@ -129,40 +148,9 @@
                 <a id="exit" class="item" class="menu-item" href="#">Выйти</a>
               </div>
             </div>
-            <div class="alerts icon" onclick="showMessages()">
-              <div class="count row">12</div>
+            <div class="alerts icon" onclick="showMessages(event)">
+              <div class="count row">35</div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="header-menu">
-        <div class="container row">
-          <div class="catalog row">
-            <a class="topmenu-item" href="../ekipirovka/" data-href="o_ek" data-id="ekip" data-level="1" data-title="Экипировка" onclick="openPage(event)">Экипировка</a>
-            <a class="submenu-item" href="../ekipirovka/?odegda" data-href="odegda" data-level="2" data-title="Одежда" onclick="openPage(event)">Одежда</a>
-            <a class="submenu-item" href="../ekipirovka/?obuv" data-href="obuv" data-level="2" data-title="Обувь" onclick="openPage(event)">Обувь</a>
-            <a class="submenu-item" href="../ekipirovka/?shlem" data-href="shlem" data-level="2" data-title="Шлемы" onclick="openPage(event)">Шлемы</a>
-            <a class="submenu-item" href="../ekipirovka/?optic" data-href="optic" data-level="2" data-title="Оптика" onclick="openPage(event)">Оптика</a>
-            <a class="submenu-item" href="../ekipirovka/?snarag" data-href="snarag" data-level="2" data-title="Снаряжение" onclick="openPage(event)">Снаряжение</a>
-            <a class="submenu-item" href="../ekipirovka/?zashita" data-href="zashita" data-level="2" data-title="Защита" onclick="openPage(event)">Защита</a>
-            <a class="submenu-item" href="../ekipirovka/?sumruk" data-href="sumruk" data-level="2" data-title="Сумки и рюкзаки" onclick="openPage(event)">Сумки и рюкзаки</a>
-            <a class="submenu-item" href="../ekipirovka/?sale" data-href="sale" data-level="2" data-title="Распродажа" onclick="openPage(event)">Распродажа!</a>
-            <a class="submenu-item" href="../ekipirovka/?merchandising" data-href="merchandising" data-level="2" data-title="Мерчандайзинг" onclick="openPage(event)">Мерчандайзинг</a>
-          </div>
-          <div class="info row">
-            <form action="#" id="page-search" class="search row" onsubmit="findOnPage(event)" onfocusin="onFocusSearch(this)" onfocusout="onBlurSearch(this)">
-              <div class="row">
-                <div class="search icon" onclick="findOnPage(event)"></div>
-                <input id="page-search-input" type="text" autocomplete="off" placeholder="Поиск...">
-              </div>
-              <div class="close icon" onclick="startClearPageSearch()"></div>
-            </form>
-            <a id="header-cart" class="row" href="../ekipirovka/?cart" data-href="cart" data-level="2" data-title="Корзина" onclick="openPage(event)">
-              <div class="amount"><span>200 678 900 000</span>&nbsp;руб.</div>
-              <div class="cart icon white">
-                <div class="count row">35</div>
-              </div>
-            </a>
           </div>
         </div>
       </div>
@@ -864,6 +852,113 @@
       </div>
     </div>
 
+    <!-- Мобильное меню -->
+    <div class="menu-mob overlay" id="mobMenu">
+      <div class="menu-mob body" id="mobBody">
+        <div class="menu-mob head-mob">
+          <svg class="close-btn" id="closeMob" width="20" height="20" viewBox="0 0 20 20" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round"></path>
+            <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round"></path>
+          </svg>
+          <a class="logo" href="../"><img src="../img/logo.svg" alt="Логотип" /></a>
+        </div>
+        <div class="mob-catalog">
+          <div class="col">
+            <div class="activate hover mobItem">
+              <div class="head row">
+                <div class="title">Каталоги</div>
+                <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
+                </svg>
+              </div>
+              <div class="drop-down catalogs">
+                <div class="row">
+                  <a class="item catalog" href="#">Предзаказы</a>
+                  <a class="item cart-info row" href="#">
+                    <div class="cart icon"></div>
+                    <div class="amount">0</div>
+                  </a>
+                </div>
+                <div class="row">
+                  <a class="item catalog" href="#">Экипировка</a>
+                  <a class="item cart-info row" href="#">
+                    <div class="cart icon"></div>
+                    <div class="amount full">189</div>
+                  </a>
+                </div>
+                <div class="row">
+                  <a class="item catalog" href="#">Снегоходы</a>
+                  <a class="item cart-info row" href="#">
+                    <div class="cart icon"></div>
+                    <div class="amount full">44</div>
+                  </a>
+                </div>
+                <div class="row">
+                  <a class="item catalog" href="#">Лодки и моторы</a>
+                  <a class="item cart-info row" href="#">
+                    <div class="cart icon"></div>
+                    <div class="amount full">12</div>
+                  </a>
+                </div>
+                <div class="row">
+                  <a class="item catalog" href="#">Мерчандайзинг</a>
+                  <a class="item cart-info row" href="#">
+                    <div class="cart icon"></div>
+                    <div class="amount">0</div>
+                  </a>
+                </div>
+                <!-- Если в выпадающем меню нужна информация о пользователе -->
+                <!-- <a class="menu-item row" href="#">
+                                            <div class="title">Экипировка</div>
+                                            <div class="cart full">189</div>
+                                        </a>
+                                        <a class="menu-item row" href="#">
+                                            <div class="title">Снегоходы</div>
+                                            <div class="cart full">44</div>
+                                        </a>
+                                        <a class="menu-item row" href="#">
+                                            <div class="title">Лодки и моторы</div>
+                                            <div class="cart">12</div>
+                                        </a>
+                                        <a class="menu-item row" href="#">
+                                            <div class="title">Мерчандайзинг</div>
+                                            <div class="cart">0</div>
+                                        </a> -->
+              </div>
+            </div>
+    
+            <!--  -->
+            <div class="activate hover mobItem">
+              <div class="head row">
+                <div class="title">Закупки</div>
+                <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
+                </svg>
+              </div>
+              <div class="drop-down">
+                <a class="item" href="#">Заказы</a>
+                <a class="item" href="#">Оплаты</a>
+                <a class="item" href="#">Рекламации</a>
+                <a class="item" href="#">Документы</a>
+                <a class="item" href="#">Сертификаты</a>
+              </div>
+            </div>
+            <div class="activate hover mobItem">
+              <div class="head row">
+                <div class="title">Оплаты</div>
+                <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
+                </svg>
+              </div>
+              <div class="drop-down">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="http://api.topsports.ru/spad/q2.php"></script>
     <script src="../js/discounts.js"></script>
     <script src="../js/main.js"></script>
@@ -871,6 +966,7 @@
     <script src="../js/cart.js"></script>
     <script src="../js/content.js"></script>
     <script src="../js/carousel.js"></script>
+    <script src="../js/mobile.js"></script>
 
   </body>
 </html>
