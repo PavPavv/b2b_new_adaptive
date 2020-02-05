@@ -25,6 +25,12 @@ if (headerCart) {
 }
 
 //=====================================================================================================
+// При запуске страницы:
+//=====================================================================================================
+
+setPaddingToBody();
+
+//=====================================================================================================
 // Полифиллы:
 //=====================================================================================================
 
@@ -102,90 +108,53 @@ function sendRequest(url, data, type = 'application/json; charset=utf-8') {
   });
 }
 
-// Получение данных корзины:
-
-function getCartInfo() {
-  return new Promise((resolve, reject) => {
-    sendRequest(url + 'cart.txt')
-    .then(
-      result => {
-        if (JSON.stringify(cart) === result) {
-          // console.log(cart);
-          reject();
-        } else {
-          cart = JSON.parse(result);
-          // console.log(cart);
-          resolve();
-        }
-      }
-    )
-    .catch(error => {
-      // console.log(error);
-      reject();
-    })
-  });
-}
-
-// Получение данных о конкретном товаре:
-
-function getProductInfo(id) {
-  return new Promise((resolve, reject) => {
-    sendRequest(`http://80.234.34.212:2000/-aleksa-/TopSports/test/product${id}.txt`)
-    .then(
-      result => {
-        var product = JSON.parse(result);
-        // console.log(product);
-        resolve(product);
-      }
-    )
-    .catch(error => {
-      // console.log(error);
-      reject();
-    })
-  });
-}
-
 //=====================================================================================================
-// Сортировка объектов по алфавиту:
+// Сортировка объектов:
 //=====================================================================================================
 
 // Сортировка по ключу:
 
-function sortObjByKey(obj) {
-  var sortedObj = {};
-  Object.keys(obj).sort().forEach(key => sortedObj[key] = obj[key]);
-  return sortedObj;
-}
-
-// Сортировка только по численной части ключа:
-
-function sortObjByNumericKey(obj) {
-  var sortedObj = {};
-  Object.keys(obj).sort((a,b) => {
-    if (parseInt(a, 10) < parseInt(b, 10)) {
-      return -1;
-    }
-    if (parseInt(a, 10) > parseInt(b, 10)) {
-      return 1;
-    }
-    return 0;
-  }).forEach(key => sortedObj[key] = obj[key]);
+function sortObjByKey(obj, type = 'string') {
+  var arrayObj = Object.keys(obj),
+      sortedObj = {};
+  switch (type) {
+    case 'string':
+      arrayObj = arrayObj.sort();
+    case 'number':
+      arrayObj = arrayObj.sort((a,b) =>  a - b);
+      break;
+    case 'number from string':
+      arrayObj = arrayObj.sort((a,b) => parseInt(a, 10) - parseInt(b, 10));
+      break;
+  }
+  arrayObj.forEach(key => sortedObj[key] = obj[key]);
   return sortedObj;
 }
 
 // Сортировка по значению:
 
-function sortObjByValue(obj) {
-  var sortedObj = {};
-  Object.keys(obj).sort((a,b) => {
-    if (obj[a] < obj[b]) {
-      return -1;
-    }
-    if (obj[a] > obj[b]) {
-      return 1;
-    }
-    return 0;
-  }).forEach(key => sortedObj[key] = obj[key]);
+function sortObjByValue(obj, type = 'string') {
+  var arrayObj = Object.keys(obj),
+      sortedObj = {};
+  switch (type) {
+    case 'string':
+      arrayObj = arrayObj.sort((a,b) => {
+        if (obj[a] < obj[b]) {
+          return -1;
+        }
+        if (obj[a] > obj[b]) {
+          return 1;
+        }
+        return 0;
+      });
+    case 'number':
+      arrayObj = arrayObj.sort((a,b) => obj[a] - obj[b]);
+      break;
+    case 'number from string':
+      arrayObj = arrayObj.sort((a,b) => parseInt(obj[a], 10) - parseInt(obj[b], 10));
+      break;
+  }
+  arrayObj.forEach(key => sortedObj[key] = obj[key]);
   return sortedObj;
 }
 
@@ -211,36 +180,37 @@ function storageAvailable(type) {
 
 // Сохранение данныx в storage или cookie:
 
-function saveInLocal(key, data) {
+function saveInLocal(data, type) {
   var stringData = JSON.stringify(data);
-  if (storageAvailable('localStorage')) {
-    localStorage[key] = stringData;
+  if (storageAvailable(type)) {
+    window[type][website] = stringData;
   }
   else {
-    if (getCookie(key)) {
-      deleteCookie(key);
+    if (getCookie(website)) {
+      deleteCookie(website);
     }
-    setCookie(key, stringData, {expires: getDateExpires(30)});
+    setCookie(website, stringData, {expires: getDateExpires(30)});
   }
 }
 
 // Получение данных из storage или cookie:
 
-function getFromLocal(key) {
-  if (storageAvailable('localStorage')) {
-    if (localStorage[key]) {
-      return JSON.parse(localStorage[key]);
-    } else {
-      return undefined;
+function getFromLocal(key, type) {
+  var info = {};
+  if (storageAvailable(type)) {
+    if (window[type][website]) {
+      info = JSON.parse(window[type][website]);
     }
   }
   else {
-    if (getCookie(key)) {
-      return JSON.parse(getCookie(key));
-    } else {
-      return undefined;
+    if (getCookie(website)) {
+      info = JSON.parse(getCookie(website));
     }
   }
+  if (!info[key]) {
+    info[key] = {};
+  }
+  return info;
 }
 
 // Сохранение данных в cookie:
@@ -296,39 +266,41 @@ function deleteCookie(key) {
 
 // Получение данных о странице по ключу:
 
-function getInfo(key) {
-  var pageInfo = getFromLocal(website) ? getFromLocal(website) : {};
-  if (!pageInfo[key]) {
-    pageInfo[key] = {};
-  }
-  return pageInfo[key];
+function getInfo(key, type = 'localStorage') {
+  var info = getFromLocal(key, type);
+  return info[key];
 }
 
 // Сохранение данных о странице по ключу:
 
-function saveInfo(key, data) {
-  var pageInfo = getFromLocal(website) ? getFromLocal(website) : {};
-  if (!pageInfo[key]) {
-    pageInfo[key] = {};
-  }
-  pageInfo[key] = data;
-  saveInLocal(website, pageInfo);
+function saveInfo(key, data, type = 'localStorage') {
+  var info = getFromLocal(key, type);
+  info[key] = data;
+  saveInLocal(info, type);
 }
 
 // Удаление всех данных о странице по ключу:
 
-function removeInfo(key, data) {
-  var pageInfo = getFromLocal(website) ? getFromLocal(website) : {};
-  if (!pageInfo[key]) {
-    pageInfo[key] = {};
-  }
-  pageInfo[key] = data;
-  saveInLocal(website, pageInfo);
+function removeInfo(key, type = 'localStorage') {
+  var info = getFromLocal(key, type);
+  info[key] = {};
+  saveInLocal(info, type);
 }
 
 //=====================================================================================================
 // Визуальное отображение контента на странице:
 //=====================================================================================================
+
+// Установка отступов документа:
+
+window.addEventListener('resize', setPaddingToBody);
+
+function setPaddingToBody() {
+  var headerHeight = document.querySelector('.header').clientHeight;
+  var footerHeight = document.querySelector('.footer').clientHeight;
+  document.body.style.paddingTop = `${headerHeight}px`;
+  document.body.style.paddingBottom = `${footerHeight + 20}px`;
+}
 
 // Вставка заглушки при ошибке загрузки изображения:
 
@@ -395,6 +367,12 @@ function closeError() {
   closePopUp(errorContainer);
 }
 
+// Отображение количества знаков, оставшихся в поле комментариев:
+
+function countSigns(textarea) {
+  document.getElementById('textarea-counter').textContent = 300 - textarea.value.length;
+}
+
 // Удаление значения из инпута при его фокусе:
 
 function onFocusInput(input) {
@@ -407,6 +385,21 @@ function onFocusInput(input) {
 
 function onBlurInput(input) {
   input.value = input.dataset.value;
+}
+
+// Разворачивание поля поиска в шапке сайта:
+
+function onFocusSearch(form) {
+  form.classList.add('onfocus');
+}
+
+// Сворачивание поля поиска в шапке сайта:
+
+function onBlurSearch(form) {
+  event.preventDefault();
+  setTimeout(() => {
+    form.classList.remove('onfocus');
+  }, 100);
 }
 
 // Запрет на ввод в инпут любого значения кроме цифр:
@@ -423,6 +416,21 @@ function checkValue(event) {
     return false;
   }
 }
+
+// Добавление всплывающих подсказок:
+
+function addTooltips(key) {
+  var elements = document.querySelectorAll(`[data-key=${key}]`);
+  if (elements) {
+    elements.forEach(el => {
+      el.setAttribute('tooltip', el.textContent.trim());
+    });
+  }
+}
+
+//=====================================================================================================
+// Вспомогательные функции:
+//=====================================================================================================
 
 // Кросс-браузерная функция для получения символа из события keypress:
 
@@ -442,15 +450,13 @@ function getChar(event) {
   return null; // спец. символ
 }
 
-// Добавление всплывающих подсказок:
+// Проверка пустой ли объект:
 
-function addTooltips(key) {
-  var elements = document.querySelectorAll(`[data-key=${key}]`);
-  if (elements) {
-    elements.forEach(el => {
-      el.setAttribute('tooltip', el.textContent.trim());
-    });
+function isEmptyObj(obj) {
+  if (Object.keys(obj).length > 0) {
+    return false;
   }
+  return true;
 }
 
 // Функция преобразования цены к формату с пробелами:
@@ -541,6 +547,25 @@ function goToTop() {
 }
 
 //=====================================================================================================
+// Работа с окном уведомлений:
+//=====================================================================================================
+
+// Открытие окна уведомлений:
+
+function showMessages() {
+  openPopUp(alertsContainer, 'flex');
+}
+
+// Закрытие окна уведомлений:
+
+function closeMessages(event) {
+  if (!event.target.closest('.close-btn') && event.target.closest('.alerts.pop-up')) {
+    return;
+  }
+  closePopUp(alertsContainer);
+}
+
+//=====================================================================================================
 // Работа выпадающих списков:
 //=====================================================================================================
 
@@ -552,9 +577,13 @@ document.addEventListener('click', (event) => {
   }
 });
 
-function DropDown(obj) {
+// type = 'sort' 'select' 'checkbox';
+
+function DropDown(obj, type, curArray) {
   // Элементы для работы:
   this.filter = obj;
+  this.type = type;
+  this.curArray = curArray;
   this.head = obj.querySelector('.head');
   this.title = obj.querySelector('.title');
   this.items = obj.querySelectorAll('.item');
@@ -621,109 +650,95 @@ function DropDown(obj) {
 }
 
 //=====================================================================================================
-// Работа с окном уведомлений:
-//=====================================================================================================
-
-// Открытие окна уведомлений:
-
-function showMessages() {
-  openPopUp(alertsContainer, 'flex');
-}
-
-// Закрытие окна уведомлений:
-
-function closeMessages(event) {
-  console.log(event.target);
-  if (!event.target.closest('.close-btn') && event.target.closest('.alerts.pop-up')) {
-    return;
-  }
-  closePopUp(alertsContainer);
-}
-
-//=====================================================================================================
 // Работа с таблицами:
 //=====================================================================================================
 
-// Выравнивание столбцов таблицы при загрузке:
+// function openTable(id) {
+//   var table = new Table(document.getElementById(id));
+//   table.init();
+// }
 
-document.addEventListener('DOMContentLoaded', () => {
-  var table = document.querySelector('.table-wrap');
-  if (table) {
-    setTimeout(() => alignTableColumns(table), 1000);
-  }
-});
-
-function alignTableColumns(table) {
-  var headCells = table.querySelectorAll('.table-head th');
-  headCells.forEach(headCell => {
-    var bodyCell = table.querySelector(`.table-body > tr:first-child > td:nth-child(${headCell.id})`),
-        headCellWidth = headCell.offsetWidth,
-        bodyCellWidth = bodyCell.offsetWidth;
-    if (headCellWidth > bodyCellWidth) {
-      headCell.style.width = headCellWidth + 'px';
-      headCell.style.minWidth = headCellWidth + 'px';
-      headCell.style.maxWidth = headCellWidth + 'px';
-      bodyCell.style.width = headCellWidth + 'px';
-      bodyCell.style.minWidth = headCellWidth + 'px';
-      bodyCell.style.maxWidth = headCellWidth + 'px';
-    }
-    if (headCellWidth < bodyCellWidth) {
-      headCell.style.width = bodyCellWidth + 'px';
-      headCell.style.minWidth = bodyCellWidth + 'px';
-      headCell.style.maxWidth = bodyCellWidth + 'px';
-      bodyCell.style.width = bodyCellWidth + 'px';
-      bodyCell.style.minWidth = bodyCellWidth + 'px';
-      bodyCell.style.maxWidth = bodyCellWidth + 'px';
-    }
-  });
-}
-
-// Изменение ширины столбоцов таблицы пользователем:
-
-(function () {
-  var curColumn = null,
-      startOffset;
-
-  var resizeBtns = document.querySelectorAll('.resize-btn');
-
-  if (resizeBtns.length > 0) {
-    resizeBtns.forEach(el => {
-      el.addEventListener('mousedown', (event) => {
-        curColumn = event.currentTarget.parentElement;
-        startOffset = curColumn.offsetWidth - event.pageX;
-      });
-    });
-
-    document.addEventListener('mousemove', (event) => {
-      if (curColumn) {
-        var newWidth = startOffset + event.pageX + 'px',
-            curTable = curColumn.closest('.table-wrap');
-        curColumn.style.width = newWidth;
-        curColumn.style.minWidth = newWidth;
-        curColumn.style.maxWidth = newWidth;
-        curTable.querySelectorAll(`.table-body td:nth-child(${curColumn.id})`).forEach(el => {
-          el.style.width = newWidth;
-          el.style.minWidth = newWidth;
-          el.style.maxWidth = newWidth;
-        });
-      }
-    });
-
-    document.addEventListener('mouseup', () => {
-      curColumn = null;
-    });
-  }
-})();
-
-function onFocusSearch(form) {
-  form.classList.add('onfocus');
-}
-
-function onBlurSearch(form) {
-  event.preventDefault();
+var table = document.querySelector('.table-wrap');
+if (table) {
+  table = new Table(table);
   setTimeout(() => {
-    form.classList.remove('onfocus');
-  }, 100);
+    table.alignColumns();
+  }, 1000);
+}
+
+function Table(obj, data) {
+  // Элементы для работы:
+  this.table = obj;
+  this.head = obj.querySelector('.table-head');
+  this.body = obj.querySelector('.table-body');
+  this.resizeBtns = this.head.querySelectorAll('.resize-btn');
+
+  // Константы:
+  this.rowTemplate = this.body.innerHTML;
+  this.data = data;
+
+  // Динамические переменные:
+  this.curColumn = null;
+  this.startOffset = 0;
+
+  // Установка обработчиков событий:
+  this.setEventListeners = function() {
+    if (this.resizeBtns.length > 0) {
+      this.resizeBtns.forEach(el => el.addEventListener('mousedown', (event) => this.startResize(event)));
+      this.table.addEventListener('mouseleave', () => this.stopResize());
+      document.addEventListener('mousemove', (event) => this.resize(event));
+      document.addEventListener('mouseup', () => this.stopResize());
+    }
+  }
+  this.setEventListeners();
+
+  // Выравнивание столбцов таблицы при загрузке:
+  this.alignColumns = function() {
+    var headCells = this.head.querySelectorAll('tr:first-child > th');
+    headCells.forEach(headCell => {
+      var bodyCell = this.body.querySelector(`tr:first-child > td:nth-child(${headCell.id})`),
+          bodyCellWidth = bodyCell.offsetWidth,
+          newWidth = bodyCellWidth;
+        headCell.style.width = newWidth + 'px';
+        headCell.style.minWidth = newWidth + 'px';
+        headCell.style.maxWidth = newWidth + 'px';
+        bodyCell.style.width = newWidth + 'px';
+        bodyCell.style.minWidth = newWidth + 'px';
+        bodyCell.style.maxWidth = newWidth + 'px';
+    });
+  }
+
+  // Запуск перетаскивания столбца:
+  this.startResize = function(event) {
+    this.curColumn = event.currentTarget.parentElement;
+    this.startOffset = this.curColumn.offsetWidth - event.pageX;
+  }
+
+  // Перетаскивание столбца:
+  this.resize = function(event) {
+    if (this.curColumn) {
+      var newWidth = this.startOffset + event.pageX;
+          newWidth = newWidth > 3 ? newWidth + 'px' : '3px';
+      this.curColumn.style.width = newWidth;
+      this.curColumn.style.minWidth = newWidth;
+      this.curColumn.style.maxWidth = newWidth;
+      this.head.querySelectorAll(`th:nth-child(${this.curColumn.id})`).forEach(el => {
+        el.style.width = newWidth;
+        el.style.minWidth = newWidth;
+        el.style.maxWidth = newWidth;
+      });
+      this.body.querySelectorAll(`td:nth-child(${this.curColumn.id})`).forEach(el => {
+        el.style.width = newWidth;
+        el.style.minWidth = newWidth;
+        el.style.maxWidth = newWidth;
+      });
+    }
+  }
+
+  // Остановка перетаскивания столбца:
+  this.stopResize = function() {
+    this.curColumn = null;
+  }
 }
 
 //=====================================================================================================
@@ -736,25 +751,39 @@ function extractProps(template) {
   return template.match(/#[^#]+#/gi).map(prop => prop = prop.replace(/#/g, ''));
 }
 
-// Заполнение блока информацией по шаблону:
+// Заполнение блока по шаблону:
 
-function createByTemplate(data, block, template) {
-  var props = extractProps(template),
-      list = '',
-      newEl = template,
-      value,
-      propRegExp;
-  data.forEach(el => {
-    props.forEach(key => {
-      propRegExp = new RegExp('#' + key + '#', 'gi');
-      if (el[key] == undefined) {
-        value = '';
-      } else {
-        value = el[key];
-      }
-      newEl = newEl.replace(propRegExp, value);
-    });
+function fillByTemplate(template, data, target) {
+  var list = createListByTemplate(template, data);
+  target.insertAdjacentHTML('beforeend', list);
+}
+
+// Создание списка элементов на основе шаблона:
+
+function createListByTemplate(template, data) {
+  var list = '', newEl;
+  data.forEach(dataItem => {
+    newEl = template;
+    newEl = createElByTemplate(newEl, dataItem);
     list += newEl;
   });
-  block.insertAdjacentHTML('beforeend', list);
+  return list;
+}
+
+// Создание одного элемента на основе шаблона:
+
+function createElByTemplate(newEl, data) {
+  var props = extractProps(newEl),
+      propRegExp,
+      value;
+  props.forEach(key => {
+    propRegExp = new RegExp('#' + key + '#', 'gi');
+    if (data[key]) {
+      value = data[key];
+    } else {
+      value = '';
+    }
+    newEl = newEl.replace(propRegExp, value);
+  });
+  return newEl;
 }

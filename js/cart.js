@@ -13,38 +13,26 @@ if (headerCart) {
 }
 
 var cartContent = document.getElementById('cart');
-
 if (cartContent) {
   var cartFull = document.getElementById('cart-full'),
       cartEmpty = document.getElementById('cart-empty'),
       cartLinks = document.getElementById('cart-links'),
       cartLinksList = document.getElementById('cart-links-list'),
-/* !!! Фильтр селектом */
-      // cartFilters = document.getElementById('cart-filters'),
-      // filterSelect = document.getElementById('filter-select'),
-/* !!! Фильтр чекбоксом */
-      filterAction = document.getElementById('filter-action'),
-      filterActionMenu = filterAction.querySelector('.menu-select'),
-
-      filterAll = document.getElementById('filter-all'),
-      cartInform = document.getElementById('cart-info'),
-      cartAmount = cartInform.querySelector('.amount'),
-      cartRetailPrice = cartInform.querySelector('.retail-price'),
-      cartOrderPrice = cartInform.querySelector('.order-price'),
-      cartDiscount = cartInform.querySelector('.cart-discount'),
+      cartInfo = document.getElementById('cart-info'),
+      cartAmount = cartInfo.querySelector('.amount'),
+      cartRetailPrice = cartInfo.querySelector('.retail-price'),
+      cartOrderPrice = cartInfo.querySelector('.order-price'),
+      cartDiscount = cartInfo.querySelector('.cart-discount'),
       cartDiscountAmount = cartDiscount.querySelector('.discount-amount'),
       cartDiscountPercent = cartDiscount.querySelector('.discount-percent'),
       cartMakeOrder = cartContent.querySelector('.cart-make-order'),
       deleteBtn = document.getElementById('delete-btn'),
       orderBtn = document.getElementById('order-btn'),
-      warningBtn = document.getElementById('warning-btn'),
       orderForm = document.getElementById('order-form'),
       paymentSelect = document.getElementById('payment-select'),
       partnerSelect = document.getElementById('partner-select'),
       deliverySelect = document.getElementById('delivery-select'),
       addressSelect = document.getElementById('address-select'),
-      comment = document.getElementById('comment'),
-      commentCounter = document.getElementById('comment-counter'),
       orderInfo = document.getElementById('order-info'),
       orderNames = document.getElementById('order-names'),
       copyResultContainer = document.getElementById('copy-result-container'),
@@ -58,15 +46,7 @@ if (cartContent) {
 
   // Получение шаблонов из HTML:
 
-  var cartLinkTemplate = cartLinksList.innerHTML,
- /* !!! Фильтр селектом */
-      // filterSelectTemplate = filterSelect.innerHTML,
-      // cartFiltersTemplate =  filterSelect.querySelector('.filter-value').outerHTML,
- /* !!! Фильтр чекбоксом */
-      filterActionTemplate = filterActionMenu.innerHTML,
-      itemFilterActionTemplate =  filterActionMenu.querySelector('.action').outerHTML,
-
-      cartRowTemplate = cartRows.innerHTML,
+  var cartRowTemplate = cartRows.innerHTML,
       cartTableRowTemplate = cartTable.querySelector('tr').outerHTML;
 }
 
@@ -81,60 +61,31 @@ var curProduct,
 // Работа с данными о состоянии корзины:
 //=====================================================================================================
 
-// Проверка актуальности данных в корзине:
+// Получение данных корзины с сервера:
 
-function checkCartRelevance() {
-  var id, freeQty, price, retailPrice, actionId, discount, curActionId,
-      cartInfo = cart[cartId];
-
-  for (id in cartInfo) {
-    freeQty = cartInfo[id].freeQty;
-    price = cartInfo[id].price;
-    retailPrice = cartInfo[id].retailPrice;
-    actionId = cartInfo[id].actionId;
-    id = cartInfo[id].id;
-    findCurData(id);
-    if (curProduct) {
-      curActionId = 0;
-      discount = findDiscount(id);
-      if (discount && discount.dtitle) {
-        curActionId = discount.did;
+function getCartInfo() {
+  return new Promise((resolve, reject) => {
+    sendRequest(url + 'cart.txt')
+    .then(
+      result => {
+        if (JSON.stringify(cart) === result) {
+          // console.log(cart);
+          reject();
+        } else {
+          cart = JSON.parse(result);
+          // console.log(cart);
+          resolve();
+        }
       }
-      if (freeQty != curProduct.free_qty || price != curProduct.price_cur1 || retailPrice != curProduct.price_user1 || actionId != curActionId) {
-        saveCartInfo(id, {freeQty: curProduct.free_qty, price: curProduct.price_cur1, retailPrice: curProduct.price_user1, actionId: curActionId});
-      }
-    }
-  }
+    )
+    .catch(error => {
+      // console.log(error);
+      reject();
+    })
+  });
 }
 
-// Сохранение данных о состоянии корзины:
-
-function saveCartInfo(id, options) {
-  id = 'id_' + id;
-  if (!cart[cartId]) {
-    cart[cartId] = {};
-  }
-  if (options.qty == 0 && !cart[cartId][id]) {
-    return;
-  }
-  if (!cart[cartId][id]) {
-    cart[cartId][id] = {};
-  }
-  cart[cartId][id].cartId = cartId;
-  cart[cartId][id].id = id.replace('id_', '');
-  for (key in options) {
-    cart[cartId][id][key] = options[key];
-  }
-  cartChanges[id] = cart[cartId][id];
-  cartSentServer();
-
-  if (options.qty == 0) {
-    delete cart[cartId][id];
-  }
-  // console.log(cart);
-}
-
-// Отправка корзины на сервер:
+// Отправка данных корзины на сервер:
 
 function cartSentServer() {
   clearTimeout(cartTimer);
@@ -162,10 +113,10 @@ function orderSentServer() {
     showError('Не выбрано ни одного товара');
     return;
   }
-  var cartInfo = cart[cartId],
+  var info = cart[cartId],
       data = {};
   idList.forEach(id => {
-    data['id_' + id] = cartInfo['id_' + id];
+    data['id_' + id] = info['id_' + id];
   });
   console.log(data);
   var data = JSON.stringify(data);
@@ -176,6 +127,64 @@ function orderSentServer() {
   .catch(err => {
     // console.log(err);
   })
+}
+
+// Проверка актуальности данных в корзине:
+
+function checkCartRelevance() {
+  var freeQty, price, retailPrice, actionId, discount, curActionId,
+      info = cart[cartId];
+
+  for (let id in info) {
+    freeQty = info[id].freeQty;
+    price = info[id].price;
+    retailPrice = info[id].retailPrice;
+    actionId = info[id].actionId;
+    id = info[id].id;
+    findCurData(id);
+    if (curProduct) {
+      curActionId = 0;
+      discount = findDiscount(id);
+      if (discount && discount.dtitle) {
+        curActionId = discount.did;
+      }
+      if (freeQty != curProduct.free_qty || price != curProduct.price_cur1 || retailPrice != curProduct.price_user1 || actionId != curActionId) {
+        saveCart(id, {freeQty: curProduct.free_qty, price: curProduct.price_cur1, retailPrice: curProduct.price_user1, actionId: curActionId});
+      }
+    }
+  }
+}
+
+// Сохранение данных о состоянии корзины:
+
+function saveCart(id, options) {
+  id = 'id_' + id;
+  if (!cart[cartId]) {
+    cart[cartId] = {};
+  }
+  if (options.qty) {
+    if (options.qty == 0 && !cart[cartId][id]) {
+      return;
+    }
+    if (cart[cartId][id] && cart[cartId][id].qty == options.qty) {
+      return;
+    }
+  }
+  if (!cart[cartId][id]) {
+    cart[cartId][id] = {};
+  }
+  cart[cartId][id].cartId = cartId;
+  cart[cartId][id].id = id.replace('id_', '');
+  for (let key in options) {
+    cart[cartId][id][key] = options[key];
+  }
+  cartChanges[id] = cart[cartId][id];
+  cartSentServer();
+
+  if (options.qty == 0) {
+    delete cart[cartId][id];
+  }
+  // console.log(cart);
 }
 
 //=====================================================================================================
@@ -198,17 +207,17 @@ function countFromCart(idList) {
       freeQty,
       curPrice,
       curRetailPrice,
-      cartInfo = cart[cartId];
+      info = cart[cartId];
 
-  for (key in cartInfo) {
-    id = cartInfo[key].id;
-    freeQty = cartInfo[key].freeQty;
+  for (let key in info) {
+    id = info[key].id;
+    freeQty = info[key].freeQty;
     if (idList && (idList != id && idList.indexOf(id) === -1) || freeQty <= 0) {
       continue;
     }
-    qty = cartInfo[key].qty > freeQty ? freeQty : cartInfo[key].qty;
-    curPrice = cartInfo[key].price;
-    curRetailPrice = cartInfo[key].retailPrice;
+    qty = info[key].qty > freeQty ? freeQty : info[key].qty;
+    curPrice = info[key].price;
+    curRetailPrice = info[key].retailPrice;
 
     amount += qty;
     price += qty * curPrice;
@@ -356,20 +365,34 @@ function sumLessProc(sum) {
 function changeHeaderCart() {
   var totals = countFromCart();
   headerPrice.textContent = totals.discountPrice.toLocaleString();
-  headerAmount.textContent = totals.amount;
-  if (location.search == '?cart') {
-    cartName.textContent = ': ' + document.querySelector('.topmenu-item.active').textContent + ' - ' + totals.amount + ' товаров';
+  if (totals.amount > 0) {
+    showElement(headerAmount);
+    if (totals.amount > 99) {
+      headerAmount.textContent = '99';
+    } else {
+      headerAmount.textContent = totals.amount;
+    }
+  } else {
+    hideElement(headerAmount);
+  }
+  if (location.search == '?cart' && cartName) {
+    cartName.textContent = ': ' + document.querySelector('.topmenu-item.active').textContent + ' - ' + totals.amount + ' ' + getEnd(totals.amount);
     cartName.style.display = 'block';
   }
-  if (totals.amount == 0) {
-    headerAmount.style.visibility = 'hidden';
+}
+
+// Отображение правильного окончания в слове "товар":
+// * товар - 1 | 21 | 31 | 41 | 51 | 61 |71 | 81 | 91 | 101 ...
+// * товара - 2 | 3 | 4 | 22 | 23 | 24 | 32 | 33 | 34 ...
+// * товаров - 0 | 5 | 6 | 7 | 8 | 9 | 10-20 | 25-30 | 35-40 ...
+
+function getEnd(amount) {
+  if ((amount === 1) || (amount > 20 && amount % 10 === 1)) {
+    return 'товар';
+  } else if ((amount >= 2 && amount <= 4) || (amount > 20 && amount % 10 >= 2 && amount % 10 <= 4)) {
+    return 'товара';
   } else {
-    headerAmount.style.visibility = 'visible';
-    if (totals.amount > 99) {
-      headerShortAmount.textContent = '99';
-    } else {
-      headerShortAmount.textContent = totals.amount;
-    }
+    return 'товаров';
   }
 }
 
@@ -380,23 +403,19 @@ function changeHeaderCart() {
 // Отображение контента корзины:
 
 function renderCart() {
-  hideContent('cart');
+  changeContent('cart');
   createCatalogLink();
   if (createCartList()) {
     checkAllBtn.classList.add('checked');
-    createCartLinks();
-/* !!! Фильтр селектом */
-    // createCartFilters();
-/* !!! Фильтр чекбоксом */
-    createActionFilter();
+    // createActionFilter();
     document.querySelectorAll('.cart-row').forEach(row => {
       changeCartRow(row);
     });
     changeCartInfo();
-    cartFull.style.display = 'block';
-    cartEmpty.style.display = 'none';
+    hideElement(cartEmpty);
+    showElement(cartFull);
   }
-  cartContent.style.display = 'block';
+  showElement(cartContent);
 }
 
 // Создание сслыки на каталог:
@@ -407,53 +426,19 @@ function createCatalogLink() {
   catalogLink.href = curCatalog.href;
 }
 
-// Создание ссылок на другие корзины:
-
-function createCartLinks() {
-  var list = '', newItem;
-  document.querySelectorAll('.topmenu-item:not(.active)').forEach(item => {
-    newItem = cartLinkTemplate
-      .replace('#href#', item.href + '?cart')
-      .replace('#dataHref#', item.dataset.href + '?cart')
-      .replace('#title#', item.textContent);
-      list += newItem;
-  });
-  if (list != '') {
-    cartLinksList.innerHTML = list;
-    cartLinks.style.display = 'flex';
-  }
-}
-
-/* !!! Фильтр селектом */
-// Создание фильтров корзины:
-
-function createCartFilters() {
-  var list = '',
-      newItem,
-      unique = [];
-  for (item of discounts) {
-    if (item.dtitle && unique.indexOf(item.did) === -1) {
-      unique.push(item.did);
-      newItem = cartFiltersTemplate
-        .replace('#actionId#', item.did)
-        .replace('#actionTitle#', item.dtitle);
-      list += newItem;
-    }
-  }
-  if (list) {
-    filterSelect.innerHTML = filterSelectTemplate.replace(cartFiltersTemplate, list);
-    cartFilters.style.display = 'flex';
-  }
-}
-
-/* !!! Фильтр чекбоксом */
 // Создание фильтров по акциям:
+
+  // filterAction = document.getElementById('filter-action'),
+  // filterActionMenu = filterAction.querySelector('.menu-select'),
+
+  // var filterActionTemplate = filterActionMenu.innerHTML,
+  //     itemFilterActionTemplate =  filterActionMenu.querySelector('.action').outerHTML,
 
 function createActionFilter() {
   var list = '',
       newItem,
       unique = [];
-  for (item of discounts) {
+  for (let item of discounts) {
     if (item.dtitle && unique.indexOf(item.did) === -1) {
       unique.push(item.did);
       newItem = itemFilterActionTemplate
@@ -475,9 +460,9 @@ function createCartList() {
       cartTableList = '',
       newItem,
       qty,
-      cartInfo = cart[cartId];
-  for (key in cartInfo) {
-    qty = cartInfo[key].qty;
+      info = cart[cartId];
+  for (let key in info) {
+    qty = info[key].qty;
     key = key.replace('id_', '');
     findCurData(key);
     if (curProduct) {
@@ -485,14 +470,11 @@ function createCartList() {
       cartList += newItem;
       newItem = createCartTableRow(qty);
       cartTableList += newItem;
-    } else {
-      // если нужно удалить не найденный артикул:
-      // removeCartInfo(key);
     }
   }
   if (!cartList) {
-    cartEmpty.style.display = 'block';
-    cartFull.style.display = 'none';
+    hideElement(cartFull);
+    showElement(cartEmpty);
   } else {
     cartRows.innerHTML = cartList;
     cartTable.innerHTML = cartTableList;
@@ -506,7 +488,7 @@ function findCurData(id) {
   curArticul = null;
   curProduct = items.find(el => {
     if (el.sizes && el.sizes != 0) {
-      for (item in el.sizes) {
+      for (let item in el.sizes) {
         if (el.sizes[item].object_id == id) {
           curArticul = el.sizes[item];
           return true;
@@ -527,7 +509,7 @@ function findCurArticul(articul) {
   curArticul = null;
   curProduct = items.find(el => {
     if (el.sizes && el.sizes != 0) {
-      for (item in el.sizes) {
+      for (let item in el.sizes) {
         if (el.sizes[item].articul == articul) {
           curArticul = el.sizes[item];
           return true;
@@ -546,41 +528,46 @@ function findCurArticul(articul) {
 
 function createCartRow(qty, isBonus) {
   var newItem = cartRowTemplate,
-      productOptions = '',
-      productStatus = '';
+      options = '',
+      status = '';
   if (curProduct.sizes && Object.keys(curProduct.sizes).length > 1) {
-    productOptions = `(${curProduct.options[40]}, ${curArticul.size})`;
+    options = `(${curProduct.options[40]}, ${curArticul.size})`;
   }
   if (curArticul.free_qty > 0) {
-    var freeQty = parseInt(curArticul.free_qty, 10);
-    qty = qty > freeQty ? freeQty : qty;
+    var freeQty = parseInt(curArticul.free_qty, 10),
+        qty = qty > freeQty ? freeQty : qty;
   } else {
-    productStatus = 'not-available';
+    status = 'not-available';
   }
   if (isBonus) {
-    productStatus = 'bonus';
+    status = 'bonus';
   }
 
   newItem = newItem
-    .replace('#status#', productStatus)
-    .replace(/#id#/gi, curArticul.object_id)
+    .replace('#status#', status)
+    .replace('#options#', options)
+    .replace(/#object_id#/gi, curArticul.object_id)
     .replace('#image#', `http://b2b.topsports.ru/c/productpage/${curProduct.images[0]}.jpg`)
     .replace('#title#', curProduct.title)
-    .replace('#options#', productOptions)
     .replace('#articul#', curArticul.articul)
 
   if (isBonus) {
     newItem = newItem
       .replace('#bonus#', qty)
       .replace('#price#', 'Подарок');
-  } else if (productStatus === 'not-available') {
+  } else if (status === 'not-available') {
     newItem = newItem
       .replace('#price#', '0');
   } else {
     newItem = newItem
       .replace(/#qty#/gi, qty)
-      .replace('#price#', curProduct.price_cur1.toLocaleString())
-      .replace(/#free_qty#/gi, curArticul.free_qty);
+      .replace('#price#', convertPrice(curProduct.price_cur1))
+      .replace(/#free_qty#/gi, curArticul.free_qty)
+      .replace(/#wait_qty#/gi, curArticul.wait_qty)
+      .replace(/#warehouse_qty#/gi, curArticul.warahouse_qty)
+      .replace('#isFree#', curArticul.free_qty > 0 ? '' : 'displayNone')
+      .replace('#isWait#', curArticul.wait_qty > 0 ? '' : 'displayNone')
+      .replace('#isWarehouse#', curArticul.warehouse_qty > 0 ? '' : 'displayNone');
   }
   return newItem;
 }
@@ -590,7 +577,7 @@ function createCartRow(qty, isBonus) {
 function createCartTableRow(qty) {
   var freeQty = parseInt(curArticul.free_qty, 10);
   var newItem = cartTableRowTemplate
-    .replace('#id#', curArticul.object_id)
+    .replace('#object_id#', curArticul.object_id)
     .replace('#title#', curProduct.title)
     .replace('#articul#', curArticul.articul)
     .replace('#qty#', qty > freeQty ? freeQty : qty);
@@ -601,29 +588,61 @@ function createCartTableRow(qty) {
 //  Функции для изменения данных о количестве:
 //=====================================================================================================
 
-// Вывод информации о корзине:
+// Вывод информации о корзине в карточке товара:
 
 function checkCart(card) {
-  var input, id, qtyWrap, clicable, qty, freeQty,
-      cartInfo = cart[cartId];
-  card.querySelectorAll('.card-size').forEach(size => {
-    input = size.querySelector('.choiced-qty');
-    id = 'id_' + input.dataset.id;
-    qtyWrap = size.querySelector('.qty');
-    clicable = size.querySelector('.name.click');
-    if (cartInfo && cartInfo[id]) {
-      qty = cartInfo[id].qty;
-      freeQty = parseInt(input.dataset.freeQty, 10);
-    } else {
-      qty = 0;
+  var qty;
+  if (card.classList.contains('min-card')) {
+    var info = card.querySelector('.cart');
+    if (info) {
+      var curProduct = curItems.find(item => item.object_id == card.dataset.id),
+          sizeInfo = curProduct.sizes && curProduct.sizes != 0 ? curProduct.sizes : '',
+          totalQty = 0;
+      if (sizeInfo) {
+        for (let el in sizeInfo) {
+          totalQty += getQty(sizeInfo[el].object_id);
+        }
+      } else {
+        totalQty += getQty(curProduct.object_id);
+      }
+      if (totalQty > 0) {
+        showElement(info);
+        var count = info.querySelector('.count');
+        if (totalQty > 99) {
+          count.textContent = '99';
+        } else {
+          count.textContent = totalQty;
+        }
+      } else {
+        hideElement(info);
+      }
     }
-    qty = qty > freeQty ? freeQty : qty;
-    input.value = qty;
-    input.dataset.value = qty;
-    changeColors(qtyWrap, qty);
-    changeNameBtn(clicable, qty);
-    changeCardInfo(card);
-  });
+  } else {
+    var input;
+    card.querySelectorAll('.card-size').forEach(size => {
+      input = size.querySelector('.choiced-qty');
+      qty = getQty(input.dataset.id);
+      input.value = qty;
+      changeColors(size.querySelector('.qty'), qty);
+      changeNameBtn(size.querySelector('.name.click'), qty);
+      changeCardInfo(card);
+    });
+  }
+}
+
+// Получение даннных о количестве товара из корзины:
+
+function getQty(id) {
+  var info = cart[cartId],
+      id = 'id_' + id,
+      qty, freeQty;
+  if (info && info[id]) {
+    qty = parseInt(info[id].qty, 10);
+    freeQty = parseInt(info[id].freeQty, 10);
+  } else {
+    qty = 0;
+  }
+  return qty = qty > freeQty ? freeQty : qty;
 }
 
 // Изменение информации о корзине:
@@ -640,21 +659,20 @@ function changeCart(event) {
       actionId = curEl.dataset.actionId;
 
   qty = changeValue(sign, qty, freeQty);
-  if (parseInt(input.dataset.value, 10) === qty) {
-    return;
-  }
   findCurData(id);
   if (!curProduct) {
     return;
   }
   input.value = qty;
-  input.dataset.value = qty;
-  saveCartInfo(id, {qty: qty, freeQty: freeQty, price: curProduct.price_cur1, retailPrice: curProduct.price_user1, actionId: actionId});
+  saveCart(id, {qty: qty, freeQty: freeQty, price: curProduct.price_cur1, retailPrice: curProduct.price_user1, actionId: actionId});
   changeColors(qtyWrap, qty);
   if (curEl.classList.contains('card')) {
     var clicable = qtyWrap.querySelector('.name.click');
     changeNameBtn(clicable, qty);
     changeCardInfo(curEl);
+    if (curEl.classList.contains('full-card')) {
+      checkCart(gallery.querySelector(`.card[data-id="${curEl.dataset.id}"]`));
+    }
   } else {
     changeCartRow(curEl);
     changeCartInfo();
@@ -718,7 +736,7 @@ function changeNameBtn(el, qty) {
 
 function changeCardInfo(card) {
   var selectInfo = card.querySelector('.select-info'),
-      bonusRow = selectInfo.querySelector('.bonus'),
+      // bonusRow = selectInfo.querySelector('.bonus'),
       idList = Array.from(card.querySelectorAll('.choiced-qty')).map(item => item.dataset.id),
       totals = countFromCart(idList);
 
@@ -728,16 +746,16 @@ function changeCardInfo(card) {
     if (curProduct) {
       imgNumb = curProduct.images[0];
     }
-    bonusRow.querySelector('.bonus-img').src = `http://b2b.topsports.ru/c/productpage/${imgNumb}.jpg`;
-    bonusRow.style.display = 'flex';
+    // bonusRow.querySelector('.bonus-img').src = `http://b2b.topsports.ru/c/productpage/${imgNumb}.jpg`;
+    // bonusRow.style.display = 'flex';
   } else {
-    bonusRow.style.display = 'none';
+    // bonusRow.style.display = 'none';
   }
 
   if (totals.amount > 0) {
-    card.querySelector('.select-count').textContent = totals.amount;
-    card.querySelector('.select-price').textContent = totals.discountPrice.toLocaleString();
-    bonusRow.querySelector('.bonus-qty span').textContent = totals.bonus;
+    card.querySelector('.select-count span').textContent = totals.amount;
+    card.querySelector('.select-price span').textContent = totals.discountPrice.toLocaleString();
+    // bonusRow.querySelector('.bonus-qty span').textContent = totals.bonus;
     selectInfo.style.visibility = 'visible';
   } else {
     selectInfo.style.visibility = 'hidden';
@@ -769,10 +787,10 @@ function changeCartRow(row) {
     //   curFilter.style.display = 'block';
     // }
 /* !!! Фильтр чекбоксом */
-    curFilter = filterAction.querySelector(`[data-id="${discount.id}"]`);
-    if (curFilter) {
-      curFilter.style.display = 'block';
-    }
+    // curFilter = filterAction.querySelector(`[data-id="${discount.id}"]`);
+    // if (curFilter) {
+    //   curFilter.style.display = 'block';
+    // }
     row.classList.add('discount');
     row.dataset.actionId = discount.id;
     row.querySelector('.action .value').textContent = discount.title;
@@ -812,10 +830,10 @@ function changeCartRow(row) {
     //   curFilter.style.display = 'block';
     // }
 /* !!! Фильтр чекбоксом */
-    curFilter = filterAction.querySelector(`[data-id="0"]`);
-    if (curFilter) {
-      curFilter.style.display = 'block';
-    }
+    // curFilter = filterAction.querySelector(`[data-id="0"]`);
+    // if (curFilter) {
+    //   curFilter.style.display = 'block';
+    // }
   }
 }
 
@@ -826,7 +844,7 @@ function changeCartInfo() {
   if (idList) {
     var totals = countFromCart(idList);
     cartAmount.textContent = totals.amount;
-    cartMakeOrder.style.display = 'flex';
+    showElement(cartMakeOrder, 'flex');
 
     if (totals.amount > 0) {
       cartOrderPrice.textContent = totals.discountPrice.toLocaleString();
@@ -835,28 +853,25 @@ function changeCartInfo() {
         var discount = totals.orderDiscount;
         cartDiscountAmount.textContent = discount.amount.toLocaleString();
         cartDiscountPercent.textContent = discount.percent;
-        cartDiscount.style.display = 'block';
+        showElement(cartDiscount);
       } else {
-        cartDiscount.style.display = 'none';
+        hideElement(cartDiscount);
       }
-      warningBtn.innerHTML = 'Оформление заказа невозможно:<br>Необходимо выбрать <a href="/clients/">клиента</a>.'
     }
     return;
   } else {
     var notAvailable = cartRows.querySelectorAll('.cart-row.checked.not-available');
     if (notAvailable.length > 0) {
-      warningBtn.innerHTML = 'Оформление заказа невозможно:<br>Выбранного товара нет в наличии.';
-      cartMakeOrder.style.display = 'flex';
-      orderBtn.style.display = 'none';
-      warningBtn.style.display = 'block';
+      showElement(cartMakeOrder, 'flex');
+      hideElement(orderBtn);
     } else {
-      cartMakeOrder.style.display = 'none';
+      hideElement(cartMakeOrder);
     }
     cartAmount.textContent = 0;
   }
   cartOrderPrice.textContent = 0;
   cartRetailPrice.textContent = 0;
-  cartDiscount.style.display = 'none';
+  hideElement(cartDiscount);
 }
 
 // Получение списка id товаров, выбранных в корзине:
@@ -923,7 +938,7 @@ function loadInCart() {
     return;
   }
   addInCart.forEach(el => {
-    saveCartInfo(el.id, el.options);
+    saveCart(el.id, el.options);
   });
   renderCart();
   changeHeaderCart();
@@ -991,7 +1006,7 @@ function filterCart1(event) {
     });
     menuTitle.textContent = 'Выбрано: ' + checked.length;
     allRows.forEach(row => {
-      for (item of checked) {
+      for (let item of checked) {
         if (row.dataset.actionId === item.dataset.id) {
           row.classList.add('checked');
           row.classList.remove('displayNone');
@@ -1077,13 +1092,13 @@ function deleteSelected() {
 /* !!! Фильтр селектом */
         // filterSelect.querySelector(`[value="${actionId}"]`).style.display = 'none';
 /* !!! Фильтр чекбоксом */
-        filterAction.querySelector(`[data-id="${actionId}"]`).style.display = 'none';
+        // filterAction.querySelector(`[data-id="${actionId}"]`).style.display = 'none';
       }
       if (row.classList.contains('bonus')) {
         cartTable.firstChild.removeChild(cartTable.querySelector(`.bonus[data-id="${id}"]`));
       } else {
         cartTable.firstChild.removeChild(cartTable.querySelector(`[data-id="${id}"]`));
-        saveCartInfo(id, {qty: 0});
+        saveCart(id, {qty: 0});
       }
     });
     checkAllBtn.classList.remove('checked');
@@ -1098,7 +1113,7 @@ function deleteSelected() {
         // filterSelect.value = 'all';
         // filterCart();
 /* !!! Фильтр чекбоксом */
-        filterCart1();
+        // filterCart1();
       }
     }
   }

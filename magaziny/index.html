@@ -250,6 +250,22 @@
     </div>
 
 
+    <!-- Шаблон прелоадера -->
+    <div id="loader">
+        <div class="loader icon"></div>
+        <div class="message"></div>
+    </div>
+
+    <!-- Шаблон сообщения об ошибке -->
+    <div id="error-container" class="row" onclick="closeError()">
+      <svg class="close-btn" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round"/>
+        <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round"/>
+      </svg>
+      <div id="error">Сообщение об ошибке</div>
+    </div>
+
+    <!-- Кнопка "Наверх страницы" -->
     <svg id="up-btn" onclick="goToTop()" width="38" height="31" viewBox="0 0 38 31" fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <rect x="0.5" y="0.5" width="37" height="30" rx="4.5" fill="#454D56" fill-opacity="0.6" stroke="white" />
@@ -258,6 +274,7 @@
             fill="white" />
     </svg>
 
+    <!-- Футер -->
     <div class="footer">
         <div class="container">
             <div class="wrap">
@@ -266,8 +283,6 @@
             </div>
         </div>
     </div>
-
-
 
     <!-- Шаблон окна уведомлений -->
     <div id="alerts-container" class="row" onclick="closeMessages(event)">
@@ -585,7 +600,7 @@
             });
         }
     </script>
-    <script src="../js/common.js"></script>
+    
     <script src="../js/main.js"></script>
     <script src="../js/mobile.js"></script>
 </body>

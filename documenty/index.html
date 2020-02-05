@@ -153,6 +153,7 @@
             </div>
         </div>
     </div>
+
     <div class="main">
         <div class="container">
             <!-- Хлебные крошки -->
@@ -172,7 +173,7 @@
                 </div>
             </div>
             <!-- Таблица -->
-            <div class="table-wrap reclamacii-table">
+            <div class="table-wrap">
                 <table class="table positioned">
                     <thead class="table-head">
                         <tr>
@@ -288,6 +289,13 @@
     </div>
 
 
+    <!-- Прелоадер -->
+    <div id="loader">
+        <div class="loader icon"></div>
+        <div class="message"></div>
+    </div>
+
+    <!-- Кнопка "Наверх страницы" -->
     <svg id="up-btn" onclick="goToTop()" width="38" height="31" viewBox="0 0 38 31" fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <rect x="0.5" y="0.5" width="37" height="30" rx="4.5" fill="#454D56" fill-opacity="0.6" stroke="white" />
@@ -296,6 +304,7 @@
             fill="white" />
     </svg>
 
+    <!-- Футер -->
     <div class="footer">
         <div class="container">
             <div class="wrap">
@@ -304,9 +313,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <!-- Шаблон окна уведомлений -->
     <div id="alerts-container" class="row" onclick="closeMessages(event)">
@@ -601,7 +607,6 @@
         </div>
     </div>
 
-    <script src="../js/common.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/mobile.js"></script>
 </body>
