@@ -27,102 +27,71 @@
             <span></span>
           </div>
           <div class="left-side row">
-            <a class="logo" href="../"><img src="../img/logo.svg" alt="Логотип" /></a>
+            <a class="logo" href="../desktop"><img src="../img/logo.svg" alt="Логотип" /></a>
             <div class="row" id="menu">
+              <div class="activate">
+                <div class="head row">
+                  <a class="title" href="../desktop">Рабочий стол</a>
+                </div>
+              </div>
               <div class="activate hover">
                 <div class="head row">
                   <div class="title">Каталоги</div>
-                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
                   </svg>
                 </div>
-                <div class="drop-down catalogs">
+                <div class="drop-down">
                   <div class="row">
-                    <a class="item catalog" href="#">Предзаказы</a>
-                    <a class="item cart-info row" href="#">
+                    <a class="item catalog" href="../preorders">Предзаказы</a>
+                    <a id="cart-preorder" class="item cart-info row" href="../preorder/?cart">
                       <div class="cart icon"></div>
-                      <div class="amount">0</div>
+                      <div class="qty">0</div>
                     </a>
                   </div>
                   <div class="row">
-                    <a class="item catalog" href="#">Экипировка</a>
-                    <a class="item cart-info row" href="#">
+                    <a class="item catalog" href="../equipment/">Экипировка</a>
+                    <a id="cart-ekip" class="item cart-info row" href="../ekipirovka/?cart" data-href="cart" data-level="2"
+                      data-title="Корзина" onclick="openPage(event)">
                       <div class="cart icon"></div>
-                      <div class="amount full">189</div>
+                      <div class="qty">0</div>
                     </a>
                   </div>
                   <div class="row">
-                    <a class="item catalog" href="#">Снегоходы</a>
-                    <a class="item cart-info row" href="#">
+                    <a class="item catalog" href="../snowmobiles/">Снегоходы</a>
+                    <a id="cart-snegohod" class="item cart-info row" href="../snegohod/?cart">
                       <div class="cart icon"></div>
-                      <div class="amount full">44</div>
+                      <div class="qty">0</div>
                     </a>
                   </div>
                   <div class="row">
-                    <a class="item catalog" href="#">Лодки и моторы</a>
-                    <a class="item cart-info row" href="#">
+                    <a class="item catalog" href="../boats/">Лодки и моторы</a>
+                    <a id="cart-lodki" class="item cart-info row" href="../lodki/?cart">
                       <div class="cart icon"></div>
-                      <div class="amount full">12</div>
+                      <div class="qty">0</div>
                     </a>
                   </div>
-                  <div class="row">
-                    <a class="item catalog" href="#">Мерчандайзинг</a>
-                    <a class="item cart-info row" href="#">
-                      <div class="cart icon"></div>
-                      <div class="amount">0</div>
-                    </a>
-                  </div>
-                  <!-- Если в выпадающем меню нужна информация о пользователе -->
-                  <!-- <a class="menu-item row" href="#">
-                                <div class="title">Экипировка</div>
-                                <div class="cart full">189</div>
-                            </a>
-                            <a class="menu-item row" href="#">
-                                <div class="title">Снегоходы</div>
-                                <div class="cart full">44</div>
-                            </a>
-                            <a class="menu-item row" href="#">
-                                <div class="title">Лодки и моторы</div>
-                                <div class="cart">12</div>
-                            </a>
-                            <a class="menu-item row" href="#">
-                                <div class="title">Мерчандайзинг</div>
-                                <div class="cart">0</div>
-                            </a> -->
                 </div>
               </div>
-              <div class="activate hover">
+              <div class="activate hover select">
                 <div class="head row">
                   <div class="title">Закупки</div>
-                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
                   </svg>
                 </div>
                 <div class="drop-down">
-                  <a class="item" href="#">Заказы</a>
-                  <a class="item" href="#">Оплаты</a>
-                  <a class="item" href="#">Рекламации</a>
-                  <a class="item" href="#">Документы</a>
-                  <a class="item" href="#">Сертификаты</a>
+                  <a class="item" href="../orders/">Заказы</a>
+                  <a class="item" href="../reclamations/">Рекламации</a>
+                  <a class="item" href="../documents/">Документы</a>
+                  <a class="item" href="../certificates/">Сертификаты</a>
                 </div>
               </div>
-              <div class="activate hover">
-                <div class="head row">
-                  <div class="title">Оплаты</div>
-                  <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 5L-2.99379e-07 -2.9635e-07L8 2.08053e-07L4 5Z" fill="#34495E" />
-                  </svg>
-                </div>
-                <div class="drop-down">
-                </div>
-              </div>
+      
             </div>
           </div>
           <div class="right-side row">
-            <div class="activate hover">
+            <div class="activate hover select">
               <div class="head row">
                 <div class="profile icon"></div>
                 <div class="login">
@@ -131,23 +100,19 @@
                 </div>
               </div>
               <div class="drop-down">
-                <!-- Если в выпадающем меню нужна информация о пользователе -->
-                <!-- <a href="#">
-                            <div class="title">Пользователь</div>
-                            <div class="username">Виктор Пашковски</div>
-                            </a> -->
                 <div class="links">
-                  <a class="item" href="#">Пользователи</a>
-                  <a class="item" href="#">Контрагенты</a>
+                  <a class="item" href="../users">Пользователи</a>
+                  <a class="item" href="../contractors">Контрагенты</a>
                   <a class="item" href="#">Адреса доставки</a>
-                  <a class="item" href="#">Магазины на карте</a>
-                  <a class="item" href="#">Медиабанк</a>
+                  <a class="item" href="../shops">Магазины</a>
+                  <a class="item" href="../monitoring">Мониторинг</a>
+                  <a class="item" href="../mediabank">Медиабанк</a>
                 </div>
                 <a id="exit" class="item" class="menu-item" href="#">Выйти</a>
               </div>
             </div>
-            <div class="alerts icon" onclick="showMessages(event)">
-              <div class="count row">35</div>
+            <div class="alerts icon" onclick="showAlerts()">
+              <div class="qty in-circle row"></div>
             </div>
           </div>
         </div>
@@ -156,7 +121,7 @@
 
     <div class="main">
       <div class="container">
-        <div class="main-header">
+        <div id="main-header">
           <div id="main-nav">
             <a href="../">Главная</a>
             <a class="item active">Заказы</a>
@@ -204,7 +169,7 @@
                     </svg>
                   </div>
                 </th>
-                <th id="2" class="order-number">
+                <th id="2">
                   <div class="row">
                     <div class="title">№ заказа</div>
                     <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +187,7 @@
                   </div>
                   <div class="resize-btn"></div>
                 </th>
-                <th id="4" class="partner">
+                <th id="4">
                   <div class="row">
                     <div class="title">Контрагент</div>
                     <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -231,7 +196,7 @@
                   </div>
                   <div class="resize-btn"></div>
                 </th>
-                <th id="5" class="client">
+                <th id="5">
                   <div class="row">
                     <div class="title">Заказчик</div>
                     <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,7 +205,7 @@
                   </div>
                   <div class="resize-btn"></div>
                 </th>
-                <th id="6" class="order-type">
+                <th id="6">
                   <div class="row">
                     <div class="title">Тип заказа</div>
                     <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +214,7 @@
                   </div>
                   <div class="resize-btn"></div>
                 </th>
-                <th id="7" class="amount">
+                <th id="7" >
                   <div class="row">
                     <div class="title">Сумма счета</div>
                     <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +223,7 @@
                   </div>
                   <div class="resize-btn"></div>
                 </th>
-                <th id="8" class="status">
+                <th id="8">
                   <div class="row">
                     <div class="title">Статус заказа</div>
                     <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -268,11 +233,13 @@
                   <div class="resize-btn"></div>
                 </th>
                 <th id="9" class="statistics">
-                  <div class="row activate checkbox hover">
-                    <div class="title">Состояние товаров</div>
-                    <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4 5L8 0H0L4 5Z" fill="white"/>
-                    </svg>
+                  <div class="activate checkbox">
+                    <div class="head row">
+                      <div class="title">Состояние товаров</div>
+                      <svg class="triangle" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 5L8 0H0L4 5Z" fill="white"/>
+                      </svg>
+                    </div>
                     <div class="drop-down">
                       <div class="item row">
                         <div class="legend icon expected"></div>
@@ -309,12 +276,12 @@
           <table class="table">
             <tbody class="table-body">
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-58</div>
                   </div>
@@ -324,28 +291,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -361,12 +328,12 @@
                 </td>
               </tr>
               <tr>
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-11</div>
                   </div>
@@ -376,28 +343,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>На согласовании</div>
                   </div>
@@ -413,12 +380,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-58</div>
                   </div>
@@ -428,28 +395,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -465,12 +432,12 @@
                 </td>
               </tr>
               <tr>
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-58</div>
                   </div>
@@ -480,28 +447,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>На согласовании</div>
                   </div>
@@ -517,12 +484,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-589</div>
                   </div>
@@ -532,28 +499,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -569,12 +536,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-11</div>
                   </div>
@@ -584,28 +551,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -621,12 +588,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-589</div>
                   </div>
@@ -636,28 +603,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -673,12 +640,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-589</div>
                   </div>
@@ -688,28 +655,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -725,12 +692,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-589</div>
                   </div>
@@ -740,28 +707,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -777,12 +744,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-589</div>
                   </div>
@@ -792,28 +759,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -829,12 +796,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-589</div>
                   </div>
@@ -844,28 +811,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Петров А.Б., индивидуальный предприниматель</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -881,12 +848,12 @@
                 </td>
               </tr>
               <tr>
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-11</div>
                   </div>
@@ -896,28 +863,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>На согласовани</div>
                   </div>
@@ -933,12 +900,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-58</div>
                   </div>
@@ -948,28 +915,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -985,12 +952,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-89</div>
                   </div>
@@ -1000,28 +967,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -1037,12 +1004,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-89</div>
                   </div>
@@ -1052,28 +1019,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -1089,12 +1056,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-89</div>
                   </div>
@@ -1104,28 +1071,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -1141,12 +1108,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-89</div>
                   </div>
@@ -1156,28 +1123,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -1193,12 +1160,12 @@
                 </td>
               </tr>
               <tr class="active">
-                <td class="status-icon">
+                <td>
                   <div class="row">
                     <div class="star icon"></div>
                   </div>
                 </td>
-                <td class="order-number">
+                <td>
                   <div class="row">
                     <div>ТС-89</div>
                   </div>
@@ -1208,28 +1175,28 @@
                     <div>25.03.2018</div>
                   </div>
                 </td>
-                <td class="partner">
+                <td>
                   <div class="row">
                     <div>Активный отдых, ООО</div>
                   </div>
                 </td>
-                <td class="client">
+                <td>
                   <div class="row">
                     <div>Брагинский А.</div>
                   </div>
                 </td>
-                <td class="order-type">
+                <td>
                   <div class="row">
                     <div>Предзаказ-19 FXR</div>
                   </div>
                 </td>
-                <td class="amount">
-                  <div class="row">
-                    <div class="number">13 546 050,00</div>
+                <td >
+                  <div class="row right">
+                    <div>13 546 050,00</div>
                     <div class="download icon"></div>
                   </div>
                 </td>
-                <td class="status">
+                <td>
                   <div class="row">
                     <div>В работе</div>
                   </div>
@@ -1246,12 +1213,12 @@
               </tr>
 
               <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-589</div>
                     </div>
@@ -1261,28 +1228,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1298,12 +1265,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-11</div>
                     </div>
@@ -1313,28 +1280,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1350,12 +1317,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-589</div>
                     </div>
@@ -1365,28 +1332,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1402,12 +1369,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-589</div>
                     </div>
@@ -1417,28 +1384,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1454,12 +1421,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-589</div>
                     </div>
@@ -1469,28 +1436,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1506,12 +1473,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-589</div>
                     </div>
@@ -1521,28 +1488,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1558,12 +1525,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-589</div>
                     </div>
@@ -1573,28 +1540,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Петров А.Б., индивидуальный предприниматель</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1610,12 +1577,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-11</div>
                     </div>
@@ -1625,28 +1592,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>На согласовани</div>
                     </div>
@@ -1662,12 +1629,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-58</div>
                     </div>
@@ -1677,28 +1644,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1714,12 +1681,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-89</div>
                     </div>
@@ -1729,28 +1696,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1766,12 +1733,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-89</div>
                     </div>
@@ -1781,28 +1748,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1818,12 +1785,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-89</div>
                     </div>
@@ -1833,28 +1800,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1870,12 +1837,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-89</div>
                     </div>
@@ -1885,28 +1852,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1922,12 +1889,12 @@
                   </td>
                 </tr>
                 <tr class="active">
-                  <td class="status-icon">
+                  <td>
                     <div class="row">
                       <div class="star icon"></div>
                     </div>
                   </td>
-                  <td class="order-number">
+                  <td>
                     <div class="row">
                       <div>ТС-89</div>
                     </div>
@@ -1937,28 +1904,28 @@
                       <div>25.03.2018</div>
                     </div>
                   </td>
-                  <td class="partner">
+                  <td>
                     <div class="row">
                       <div>Активный отдых, ООО</div>
                     </div>
                   </td>
-                  <td class="client">
+                  <td>
                     <div class="row">
                       <div>Брагинский А.</div>
                     </div>
                   </td>
-                  <td class="order-type">
+                  <td>
                     <div class="row">
                       <div>Предзаказ-19 FXR</div>
                     </div>
                   </td>
-                  <td class="amount">
-                    <div class="row">
-                      <div class="number">13 546 050,00</div>
+                  <td >
+                    <div class="row right">
+                      <div>13 546 050,00</div>
                       <div class="download icon"></div>
                     </div>
                   </td>
-                  <td class="status">
+                  <td>
                     <div class="row">
                       <div>В работе</div>
                     </div>
@@ -1979,6 +1946,177 @@
       </div>
     </div>
 
+    <div id="alerts-container" class="row" onclick="closeMessages(event)">
+      <div class="alerts pop-up">
+        <div class="alerts-title row">
+          <div class="row">
+            <div class="alerts icon"></div>
+            <div class="title">Уведомления</div>
+          </div>
+          <svg class="close-btn" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round"/>
+            <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div id="alerts-body">
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message action row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.10.19</div>
+              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со скидкой 55%. Только до 11</div>
+            </div>
+          </div>
+          <div class="message attention row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.11.19</div>
+              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к регистрации <a href="#">по ссылке.</a></div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message action row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.10.19</div>
+              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со скидкой 55%. Только до 11</div>
+            </div>
+          </div>
+          <div class="message attention row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.11.19</div>
+              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к регистрации <a href="#">по ссылке.</a></div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message action row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.10.19</div>
+              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со скидкой 55%. Только до 11</div>
+            </div>
+          </div>
+          <div class="message attention row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.11.19</div>
+              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к регистрации <a href="#">по ссылке.</a></div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message action row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.10.19</div>
+              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со скидкой 55%. Только до 11</div>
+            </div>
+          </div>
+          <div class="message attention row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">25.11.19</div>
+              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к регистрации <a href="#">по ссылке.</a></div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+          <div class="message cart row">
+            <div class="message icon"></div>
+            <div>
+              <div class="date">2 часа назад</div>
+              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="loader">
+      <div class="loader icon"></div>
+      <div class="message"></div>
+    </div>
+
+    <!-- Сообщение об ошибке -->
+    <div id="message-container" class="row">
+      <svg class="close-btn" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round" />
+        <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round" />
+      </svg>
+      <div class="text"></div>
+    </div>
+
     <!-- Кнопка "Наверх страницы" -->
     <svg id="up-btn" onclick="goToTop()" width="38" height="31" viewBox="0 0 38 31" fill="none"
       xmlns="http://www.w3.org/2000/svg">
@@ -1988,200 +2126,11 @@
         fill="white" />
     </svg>
 
-    
-    <!-- Прелоадер -->
-    <div id="loader">
-      <div class="loader icon"></div>
-      <div class="message"></div>
-    </div>
-
-    <!-- Сообщение об ошибке -->
-    <div id="error-container" class="row" onclick="closeError()">
-      <svg class="close-btn" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round" />
-        <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round" />
-      </svg>
-      <div id="error">Сообщение об ошибке</div>
-    </div>
-
-    <!-- Окно уведомлений -->
-    <div id="alerts-container" class="row" onclick="closeMessages(event)">
-      <div class="alerts pop-up">
-        <div class="alerts-title row">
-          <div class="row">
-            <div class="alerts icon"></div>
-            <div class="title">Уведомления</div>
-          </div>
-          <svg class="close-btn" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.42859 1.42847L18.5714 18.5713" stroke="#34495E" stroke-linecap="round" />
-            <path d="M18.1429 1L1 18.1429" stroke="#34495E" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div id="alerts-body">
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message action row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.10.19</div>
-              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со
-                скидкой
-                55%. Только до 11</div>
-            </div>
-          </div>
-          <div class="message attention row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.11.19</div>
-              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к
-                регистрации <a href="#">по ссылке.</a></div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message action row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.10.19</div>
-              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со
-                скидкой
-                55%. Только до 11</div>
-            </div>
-          </div>
-          <div class="message attention row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.11.19</div>
-              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к
-                регистрации <a href="#">по ссылке.</a></div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message percent row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.10.19</div>
-              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со
-                скидкой
-                55%. Только до 11</div>
-            </div>
-          </div>
-          <div class="message attention row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.11.19</div>
-              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к
-                регистрации <a href="#">по ссылке.</a></div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message percent row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.10.19</div>
-              <div class="text">Акция <a href="#">Снежный бум!</a> Купи снегоходные лопаты Powertools со
-                скидкой
-                55%. Только до 11</div>
-            </div>
-          </div>
-          <div class="message attention row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">25.11.19</div>
-              <div class="text">Зарегистрируйтесь для участия в Дилерской конференции 2020! Перейдите к
-                регистрации <a href="#">по ссылке.</a></div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
-          <div class="message cart row">
-            <div class="message icon"></div>
-            <div>
-              <div class="date">2 часа назад</div>
-              <div class="text">Заказ <a href="#">ТС 123</a> от 24.09.2019 принят. Вы можете скачать счет на
-                оплату. Если оплата не поступит в течение 5 рабочих дней, заказ будет расформирован. </div>
-            </div>
-          </div>
+    <div class="footer">
+      <div class="container">
+        <div class="wrap">
+          <div>Отдел продаж: +7 (846) 300-44-99</div>
+          <div>Рабочие дни: ПН - ПТ с 8:00 до 17:00 (МСК)</div>
         </div>
       </div>
     </div>
@@ -2261,7 +2210,7 @@
                                             </a> -->
               </div>
             </div>
-
+    
             <!--  -->
             <div class="activate hover mobItem">
               <div class="head row">
@@ -2293,16 +2242,7 @@
       </div>
     </div>
 
-    <!-- Футер -->
-    <div class="footer">
-      <div class="container">
-        <div class="wrap">
-          <div>Отдел продаж: +7 (846) 300-44-99</div>
-          <div>Рабочие дни: ПН - ПТ с 8:00 до 17:00 (МСК)</div>
-        </div>
-      </div>
-    </div>
-
+    <script src ="../js/common.js"></script>
     <script src ="../js/main.js"></script>
     <script src="../js/mobile.js"></script>
 

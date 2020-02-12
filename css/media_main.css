@@ -9,7 +9,7 @@
     display: none;
 }
 .menu-mob.overlay{
-    /* opacity: 0; */
+    /* opacity: 0; */     /* не нужно расскоменчивать или добавлять это свойство, с ним меню плохо появляется */
     visibility: hidden;
     display: block;
     position: fixed;
